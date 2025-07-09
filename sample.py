@@ -1,123 +1,97 @@
-'''num=int(input())
-deno=int(input())
-try:
-    quo=num/deno
-    print(quo)
-except ZeroDivisionError:
-    print("Deno cannot e zero")
-    
-    
-try:
-    num=int(input())
-    print(num*4)
-except KeyboardInterrupt:
-    print("Number cannot be entered")
-except ValueError:
-    print("please enter the valid datatype")
-print("Bye")
-
-try:
-    file=open("File.txt")
-    str=file.readline()
-    print(str)
-    
-except IOError:
-    print("Error occured during input take")
+'''import sys
+print("Script name:",sys.argv[0])
+print("All args:",sys.argv[1:])
+print("Number of items:",len(sys.argv))
+print("Including file name:",sys.argv)
+if len(sys.argv)>1:
+    print("First arg:",sys.argv[1])
 else:
-    print("Succefully ftched the data")
-    
-#raise [Exception [,args[,trackback]]]    
-try:
-    num=11
-    print(num)
-    raise ValueError
-except:
-    print("Exception occured")
-    
-    #Trackback(most recent calls)
-    
-    
-try:
-    print("Raising Exception")
-    raise ValueError
-except:
-    print("Exception caught")
-finally:
-    print("Peforming the cleanup in finally")
-    
+    print("No arguments provided")
+
+import sys
+num1=int(sys.argv[1])
+num2=int(sys.argv[2])
+num3=int(sys.argv[3])
+print("product:",num1*num2*num3)
 
 
-
-c=int(input())
-f=(c*9/5)+32
-assert(f<=32), "Its Cold"
-print("Fahrenheit:",f)
-
-
-def display(n):
-    while True:
-        try:
-            n+=1
-            if n==21:
-                raise StopIteration
-        except StopIteration:
-            break
-        else:
-            print(n,end=' ')
-        
-i=0
-display(i)
-
-import random
-class RandomError(Exception):
-    pass
-try:
-    num=random.random()
-    if num<0.1:
-        raise RandomError
-except RandomError as e:
-    print("Random error generated")
+import sys
+if len(sys.argv)!=3:
+    print("Usage : python sample.py l b")
 else:
-    print("%.4f"%num)
+    l=float(sys.argv[1])
+    b=float(sys.argv[2])
+    print("Calculated area:", l*b)
     
-
-from calendar import *
-year=int(input("Enter a year number:"))
-print(calendar(year,2,1,8,3))
-
-from calendar import *
-Year=int(input("Enter a year number:"))
-Month=int(input("Enter a month number:"))
-str=month(Year,Month)
-print(str)
-
-from calendar import *
-year=int(input())
-if isleap(year):
-    print(year,'is leap year')
-else:
-    print(year,'is not a leap year')
-    
-#program to print the next 10 dates continously
-from datetime import *
-d=date.today()
-print(d)
-d=date(1996,6,29)
-for x in range(1,10):
-    nextdate=d+timedelta(days=x)
-    print(nextdate)
-    
-    
-import time
-epoch=time.time()
-print(epoch)
-'''
-#commnand line arg
 
 import sys
 if len(sys.argv)<2:
-    print("Usage: python hi.py <name>")
+    print("Usage: python sample.py n1,n2,.. n")
+    sys.exit()
+numbers=[int(argv) for arg in sys.argv[1:]]
+total=sum(numbers)
+print("Numbers:",numbers)
+print("Sum:",total)
+
+
+import argparse
+parser= argparse.ArgumentParser(description=" Add 2 Numbers")
+parser.add_argument('--x',type=int,required=True,help="first number")
+parser.add_argument('--y',type=int,required=True,help="second number")
+args=parser.parse_args()
+result=args.x+args.y
+print("Sum is:",result)
+
+import argparse
+parser= argparse.ArgumentParser(description=" Simple calculator")
+parser.add_argument('--x',type=int,required=True,help="first number")
+parser.add_argument('--y',type=int,required=True,help="second number")
+parser.add_argument('--opt',type=str,required=True, choices=['add','sub','mul','div'],help="operation")
+args=parser.parse_args()
+if args.opt=='add':
+    result=args.x+args.y
+elif args.opt=='sub':
+    result=args.x-args.y
+elif args.opt=='mul':
+    result=args.x*args.y
+elif args.opt=='div':
+    result=args.x/args.y
+print("Result is:",result)
+
+import os
+path='.'
+files=os.listdir(path)
+print("Files and folders in current directory:")
+for f in files:
+    print(f)
+
+
+import os
+folder="new_folder"
+if not os.path.exists(folder):
+    os.mkdir(folder)
+    print(f"Folder '{folder}' created")
 else:
-    name=sys.argv[1]
-    print(f"student,{name}!")
+    print(f"Folder '{folder}' already exists")
+
+
+
+
+import os
+file="deleteme.txt"
+if os.path.exists(file):
+    os.remove(file)
+    print(f"{file} deleted")
+else:
+    print("File not found")
+'''
+
+
+import os
+file='shift.py'
+if os.path.exists(file):
+    size=os.path.getsize(file)
+    print(f"{file} size:{size} bytes.")
+else:
+    print("File not found")
     
